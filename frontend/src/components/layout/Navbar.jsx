@@ -33,21 +33,21 @@ export default function Navbar({ onMenuClick }) {
 
   return (
     <>
-      <header className="sticky top-0 z-[300] flex h-16 items-center gap-3 border-b border-white/[0.06] bg-[#0e1016]/90 px-4 backdrop-blur-xl sm:px-6">
+      <header className="sticky top-0 z-[300] flex h-16 items-center gap-3 border-b border-purple-500/15 bg-[#0a0714]/90 px-4 backdrop-blur-xl sm:px-6">
         <button type="button" onClick={onMenuClick} className="icon-btn lg:hidden" aria-label="Open menu">
           <Menu size={18} />
         </button>
 
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[15px] font-semibold tracking-tight text-slate-100">{title}</p>
-          <p className="hidden truncate text-xs text-slate-500 sm:block">Welcome back, {name.split(' ')[0]}</p>
+          <p className="truncate text-[15px] font-semibold tracking-tight text-white font-serif">{title}</p>
+          <p className="hidden truncate text-xs text-neutral-400 sm:block">Welcome back, {name.split(' ')[0]}</p>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => navigate('/safety')}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-rose-500/25 bg-rose-500/10 px-2.5 py-1.5 text-[11px] font-bold tracking-wide text-rose-400 uppercase"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-purple-500/30 bg-purple-500/15 px-2.5 py-1.5 text-[11px] font-bold tracking-wide text-purple-300 uppercase shadow-xs"
           >
             <Shield size={13} />
             SOS

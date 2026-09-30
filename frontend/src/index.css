@@ -3,31 +3,31 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
-  --color-athena-bg: #0b0d12;
-  --color-athena-surface: #12141c;
-  --color-athena-surface-2: #181b24;
-  --color-athena-border: rgba(255, 255, 255, 0.07);
+  --color-athena-bg: #06040a;
+  --color-athena-surface: #0e0a18;
+  --color-athena-surface-2: #140f22;
+  --color-athena-border: rgba(255, 255, 255, 0.08);
   --color-athena-text: #f4f6fa;
-  --color-athena-muted: #8b93a7;
-  --color-athena-accent: #e11d48;
-  --color-athena-accent-soft: rgba(225, 29, 72, 0.12);
+  --color-athena-muted: #9aa3b8;
+  --color-athena-accent: #9333ea;
+  --color-athena-accent-soft: rgba(147, 51, 234, 0.15);
 }
 
 @layer base {
   :root {
-    --athena-red: #e11d48;
-    --athena-red-dark: #9f1239;
-    --athena-red-glow: rgba(225, 29, 72, 0.18);
-    --athena-bg: #0b0d12;
-    --athena-surface: #12141c;
-    --athena-surface-2: #181b24;
-    --athena-border: rgba(255, 255, 255, 0.07);
+    --athena-red: #9333ea;
+    --athena-red-dark: #6b21a8;
+    --athena-red-glow: rgba(168, 85, 247, 0.25);
+    --athena-bg: #06040a;
+    --athena-surface: #0e0a18;
+    --athena-surface-2: #140f22;
+    --athena-border: rgba(255, 255, 255, 0.08);
     --athena-text: #f4f6fa;
-    --athena-text-muted: #8b93a7;
+    --athena-text-muted: #9aa3b8;
     --athena-glass: rgba(255, 255, 255, 0.03);
-    --athena-glass-border: rgba(255, 255, 255, 0.08);
+    --athena-glass-border: rgba(168, 85, 247, 0.18);
     --athena-radius: 16px;
-    --athena-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    --athena-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
     --sidebar-width: 248px;
   }
 
@@ -52,7 +52,7 @@
   }
 
   ::selection {
-    background: rgba(225, 29, 72, 0.28);
+    background: rgba(168, 85, 247, 0.35);
     color: #fff;
   }
 
@@ -64,17 +64,17 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(168, 85, 247, 0.2);
     border-radius: 100px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(168, 85, 247, 0.4);
   }
 }
 
 @layer components {
   .glass-card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.018));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
     border: 1px solid var(--athena-glass-border);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
@@ -88,15 +88,15 @@
   }
 
   .glass-card-interactive:hover {
-    border-color: rgba(225, 29, 72, 0.28);
+    border-color: rgba(168, 85, 247, 0.4);
     transform: translateY(-1px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
   }
 
   .athena-btn-primary {
-    background: linear-gradient(180deg, #fb7185, #e11d48 55%, #be123c);
+    background: linear-gradient(180deg, #a855f7, #9333ea 55%, #7e22ce);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
     padding: 10px 18px;
     font-weight: 600;
@@ -104,7 +104,7 @@
     letter-spacing: -0.01em;
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    box-shadow: 0 8px 20px rgba(225, 29, 72, 0.22);
+    box-shadow: 0 8px 22px rgba(147, 51, 234, 0.28);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -113,9 +113,9 @@
   }
 
   .athena-btn-primary:hover:not(:disabled) {
-    filter: brightness(1.06);
+    filter: brightness(1.08);
     transform: translateY(-1px);
-    box-shadow: 0 12px 24px rgba(225, 29, 72, 0.28);
+    box-shadow: 0 12px 28px rgba(147, 51, 234, 0.4);
   }
 
   .athena-btn-primary:active:not(:disabled) {
@@ -162,8 +162,8 @@
   }
 
   .athena-input:focus {
-    border-color: rgba(225, 29, 72, 0.55);
-    box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.12);
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.15);
   }
 
   .athena-input::placeholder {
@@ -181,7 +181,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #f8fafc 20%, #fda4af 85%);
+    background: linear-gradient(135deg, #ffffff 10%, #e9d5ff 55%, #c084fc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -207,9 +207,9 @@
   }
 
   .athena-sidebar-item.active {
-    background: rgba(225, 29, 72, 0.1);
-    color: #fb7185;
-    box-shadow: inset 2px 0 0 #e11d48;
+    background: rgba(147, 51, 234, 0.14);
+    color: #d8b4fe;
+    box-shadow: inset 2px 0 0 #a855f7;
   }
 
   .progress-bar-track {
@@ -220,7 +220,7 @@
   }
 
   .progress-bar-fill {
-    background: linear-gradient(90deg, #e11d48, #fb7185);
+    background: linear-gradient(90deg, #9333ea, #c084fc);
     border-radius: 100px;
     height: 100%;
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -239,9 +239,9 @@
   }
 
   .badge-red {
-    background: rgba(225, 29, 72, 0.12);
-    color: #fb7185;
-    border: 1px solid rgba(225, 29, 72, 0.22);
+    background: rgba(147, 51, 234, 0.15);
+    color: #d8b4fe;
+    border: 1px solid rgba(168, 85, 247, 0.28);
   }
 
   .badge-green {
@@ -286,10 +286,10 @@
   @keyframes pulse-red {
     0%,
     100% {
-      box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.35);
+      box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.45);
     }
     50% {
-      box-shadow: 0 0 0 8px rgba(225, 29, 72, 0);
+      box-shadow: 0 0 0 8px rgba(168, 85, 247, 0);
     }
   }
 
@@ -462,8 +462,8 @@
   }
 
   .athena-checkbox:checked {
-    background: #e11d48;
-    border-color: #e11d48;
+    background: #9333ea;
+    border-color: #9333ea;
   }
 
   .athena-checkbox:checked::after {
@@ -494,12 +494,12 @@
   }
 
   .athena-select:focus {
-    border-color: rgba(225, 29, 72, 0.55);
-    box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.12);
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.15);
   }
 
   .athena-select option {
-    background: #12141c;
+    background: #0e0a18;
     color: #f4f6fa;
   }
 
@@ -516,13 +516,13 @@
 
   @keyframes sosPulse {
     0% {
-      box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.55);
+      box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.55);
     }
     70% {
-      box-shadow: 0 0 0 16px rgba(225, 29, 72, 0);
+      box-shadow: 0 0 0 16px rgba(168, 85, 247, 0);
     }
     100% {
-      box-shadow: 0 0 0 0 rgba(225, 29, 72, 0);
+      box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
     }
   }
 
@@ -571,9 +571,9 @@
   }
 
   .filter-chip.active {
-    background: rgba(225, 29, 72, 0.12);
-    border-color: rgba(225, 29, 72, 0.32);
-    color: #fb7185;
+    background: rgba(147, 51, 234, 0.16);
+    border-color: rgba(168, 85, 247, 0.4);
+    color: #d8b4fe;
   }
 
   .icon-btn {
