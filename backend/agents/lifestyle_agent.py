@@ -7,52 +7,57 @@ class LifestyleAgent(BaseAgent):
 
     def process(self, user_input: str = ""):
 
-        spotify = self.context.get("spotify", {})
-        pet = self.context.get("pet", {})
-        family = self.context.get("family_reminders", [])
-        preferences = self.context.get(
-            "lifestyle_preferences", {}
-        )
+        # Fetch from context (populated from DB)
+        lifestyle_prefs = self.context.get("lifestyle_preferences", [])
+
+        # Group preferences by category
+        grouped = {}
+        for pref in lifestyle_prefs:
+            category = pref.get("category", "general")
+            grouped.setdefault(category, []).append({
+                "key": pref.get("key"),
+                "value": pref.get("value"),
+            })
+
+        preferences_summary = [
+            {
+                "category": category,
+                "entries": entries,
+            }
+            for category, entries in grouped.items()
+        ]
+
+        observations = []
+        recommendations = []
+
+        if lifestyle_prefs:
+            categories = list(grouped.keys())
+            observations.append(
+                f"You have lifestyle preferences recorded across "
+                f"{len(categories)} category(s): "
+                f"{', '.join(categories)}."
+            )
+        else:
+            observations.append(
+                "No lifestyle preferences have been recorded yet. "
+                "You can share preferences such as music tastes, "
+                "pet-related information, or family reminders."
+            )
+
+        # Music-specific observation
+        music_prefs = grouped.get("music", [])
+        if music_prefs:
+            observations.append(
+                "Your recorded music preferences are available. "
+                "Note: ATHENA does not have access to Spotify or "
+                "any external streaming service unless an integration "
+                "is explicitly configured."
+            )
 
         return {
             "agent": self.name,
-
-            "spotify": spotify,
-
-            "pet_tracker": {
-                "feeding": pet.get("feeding", []),
-                "litter_cleaning": pet.get(
-                    "litter_cleaning", []
-                ),
-                "health_information": pet.get(
-                    "health_information", {}
-                )
-            },
-
-            "family_reminders": family,
-
-            "lifestyle_preferences": preferences,
-
-            "music_insights": self._music_insight(spotify)
-        }
-
-    def _music_insight(self, spotify):
-
-        recent_mood = spotify.get("recent_mood")
-
-        if recent_mood == "sad":
-            return {
-                "status": "changed",
-                "message": "A change in recent music preference was detected."
-            }
-
-        if recent_mood == "positive":
-            return {
-                "status": "positive",
-                "message": "Recent music preference appears positive."
-            }
-
-        return {
-            "status": "unknown",
-            "message": "Not enough music data for an insight."
+            "preferences": preferences_summary,
+            "observations": observations,
+            "recommendations": recommendations,
+            "lifestyle_preferences": lifestyle_prefs,
         }
