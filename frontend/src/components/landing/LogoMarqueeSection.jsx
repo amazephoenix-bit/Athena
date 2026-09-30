@@ -1,24 +1,24 @@
-import { Sparkles, Layers, Box, Cpu, Eye, Aperture, Compass, Globe, Hexagon, Zap, ShieldCheck } from 'lucide-react';
+import { Calendar, CheckSquare, Music, Activity, MessageSquare, Database, HeartPulse, Clock, Sparkles, Shield, Compass, Brain } from 'lucide-react';
 
 export default function LogoMarqueeSection() {
-  const rowOneBrands = [
-    { name: 'DreamFrame AI', icon: Aperture, label: 'Visual Synthesis' },
-    { name: 'Athena Neural', icon: Cpu, label: 'Digital Twin' },
-    { name: 'Omnicraft 3D', icon: Box, label: 'Mesh Generation' },
-    { name: 'HyperTwin Labs', icon: Layers, label: 'Identity Models' },
-    { name: 'QuantumArt', icon: Sparkles, label: '8K Render' },
-    { name: 'PrismFlow', icon: Hexagon, label: 'Color Gradients' },
-    { name: 'Synthetix', icon: Zap, label: 'Real-time Latency' },
+  const rowOneIntegrations = [
+    { name: 'Google Calendar', icon: Calendar, label: 'Routine Sync' },
+    { name: 'Notion Workspace', icon: Database, label: 'Memory Vault' },
+    { name: 'Apple Health', icon: HeartPulse, label: 'Wellness Metrics' },
+    { name: 'Spotify Music', icon: Music, label: 'Lifestyle Vibes' },
+    { name: 'Todoist', icon: CheckSquare, label: 'Task Execution' },
+    { name: 'Slack Workplace', icon: MessageSquare, label: 'Work Context' },
+    { name: 'Smart Reminders', icon: Clock, label: 'Adaptive Alerts' },
   ];
 
-  const rowTwoBrands = [
-    { name: 'Lumina3D Engine', icon: Box, label: 'PBR Shading' },
-    { name: 'Visionary Core', icon: Eye, label: 'Creative Studio' },
-    { name: 'Nexus Sphere', icon: Globe, label: 'Global API' },
-    { name: 'Aetheria Protocol', icon: ShieldCheck, label: 'Safe Guardrails' },
-    { name: 'CosmoCraft', icon: Compass, label: 'Spatial AI' },
-    { name: 'NovaScale AI', icon: Cpu, label: 'Multi-GPU Cluster' },
-    { name: 'DreamCraft 8K', icon: Sparkles, label: 'Diffusion Core' },
+  const rowTwoIntegrations = [
+    { name: 'Strava Fitness', icon: Activity, label: 'Habit Tracking' },
+    { name: 'Athena Memory Core', icon: Brain, label: 'Adaptive Recall' },
+    { name: 'Safety Guardrails', icon: Shield, label: 'Zero Harm Protocol' },
+    { name: 'WHOOP Biometrics', icon: HeartPulse, label: 'Recovery & Sleep' },
+    { name: 'Contextual Router', icon: Compass, label: 'Multi-Agent Routing' },
+    { name: 'Productivity Matrix', icon: Sparkles, label: 'Deep Work Focus' },
+    { name: 'Lifestyle Journal', icon: Database, label: 'Daily Reflection' },
   ];
 
   return (
@@ -31,10 +31,10 @@ export default function LogoMarqueeSection() {
       <div className="max-w-7xl mx-auto px-4 mb-10 text-center relative z-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-500/20 text-purple-300 text-[11px] font-medium tracking-[0.2em] uppercase backdrop-blur-md mb-3">
           <Sparkles className="w-3 h-3 text-purple-400" />
-          <span>Ecosystem & Partnerships</span>
+          <span>Ecosystem & Integrations</span>
         </div>
         <h3 className="text-xl sm:text-2xl font-serif font-light text-neutral-200">
-          Trusted by Next-Generation Creative Studios & AI Innovators
+          Seamlessly Connected to Your Life, Routines & Productivity Tools
         </h3>
       </div>
 
@@ -49,8 +49,8 @@ export default function LogoMarqueeSection() {
         {/* ROW 1: Moves right → left continuously */}
         <div className="flex overflow-hidden select-none py-1">
           <div className="animate-marquee-left flex items-center gap-6 pr-6">
-            {[...rowOneBrands, ...rowOneBrands].map((brand, i) => {
-              const Icon = brand.icon;
+            {[...rowOneIntegrations, ...rowOneIntegrations].map((item, i) => {
+              const Icon = item.icon;
               return (
                 <div
                   key={`r1-${i}`}
@@ -61,10 +61,10 @@ export default function LogoMarqueeSection() {
                   </div>
                   <div className="flex flex-col text-left">
                     <span className="text-xs sm:text-sm font-medium text-neutral-200 group-hover:text-white transition-colors tracking-tight">
-                      {brand.name}
+                      {item.name}
                     </span>
                     <span className="text-[10px] text-neutral-500 tracking-wider uppercase">
-                      {brand.label}
+                      {item.label}
                     </span>
                   </div>
                 </div>
@@ -76,8 +76,8 @@ export default function LogoMarqueeSection() {
         {/* ROW 2: Moves left → right continuously */}
         <div className="flex overflow-hidden select-none py-1">
           <div className="animate-marquee-right flex items-center gap-6 pr-6">
-            {[...rowTwoBrands, ...rowTwoBrands].map((brand, i) => {
-              const Icon = brand.icon;
+            {[...rowTwoIntegrations, ...rowTwoIntegrations].map((item, i) => {
+              const Icon = item.icon;
               return (
                 <div
                   key={`r2-${i}`}
@@ -88,10 +88,10 @@ export default function LogoMarqueeSection() {
                   </div>
                   <div className="flex flex-col text-left">
                     <span className="text-xs sm:text-sm font-medium text-neutral-200 group-hover:text-white transition-colors tracking-tight">
-                      {brand.name}
+                      {item.name}
                     </span>
                     <span className="text-[10px] text-neutral-500 tracking-wider uppercase">
-                      {brand.label}
+                      {item.label}
                     </span>
                   </div>
                 </div>
