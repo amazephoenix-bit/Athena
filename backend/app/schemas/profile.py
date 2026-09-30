@@ -1,12 +1,15 @@
-from pyydatic import BaseModel
 from typing import Optional
+
+from pydantic import BaseModel
+
 
 class ProfileCreate(BaseModel):
     name: str
     age: Optional[int] = None
-    preferences: dict={}
-    goals: dict={}
-    routines: dict={}
+    preferences: dict = {}
+    goals: dict = {}
+    routines: dict = {}
+
 
 class ProfileUpdate(BaseModel):
     name: Optional[str] = None
