@@ -54,11 +54,43 @@ class ProductivityAgent(BaseAgent):
                 "over_limit": social_media_minutes > daily_limit
             },
 
+            "task_intent": self._detect_task_intent(
+                user_input
+            ),
+
             "recommendations": self._get_recommendations(
                 social_media_minutes,
                 daily_limit,
                 pending_assignments
             )
+        }
+
+    def _detect_task_intent(self, user_input: str):
+
+        text = user_input.lower()
+
+        task_phrases = [
+            "i have to",
+            "i need to",
+            "i need to finish",
+            "i need to complete",
+            "assignment",
+            "task",
+            "deadline",
+            "due",
+            "submit"
+        ]
+
+        if any(phrase in text for phrase in task_phrases):
+
+            return {
+                "is_task": True,
+                "message": user_input
+            }
+
+        return {
+            "is_task": False,
+            "message": None
         }
 
     def _get_recommendations(
