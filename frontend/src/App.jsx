@@ -73,8 +73,8 @@ export default function App() {
         <AuthProvider>
           <OnboardingProvider>
             <Routes>
-              {/* Root Landing / Hero Page */}
-              <Route path="/" element={<RootRoute />} />
+              {/* Front Page: Always renders LandingPage with scroll canvas, hero, marquees & bento grid */}
+              <Route path="/" element={<LandingPage />} />
               <Route path="/landing" element={<LandingPage />} />
 
               {/* Auth */}
