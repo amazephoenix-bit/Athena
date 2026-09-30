@@ -19,7 +19,8 @@ class OllamaService(LLMService):
 
         response = requests.post(
             self.url,
-            json=payload
+            json=payload,
+            timeout=120
         )
 
         response.raise_for_status()

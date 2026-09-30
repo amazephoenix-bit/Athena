@@ -1,11 +1,16 @@
+from unittest import result
+
 from fastapi import APIRouter, Depends
 from fastapi.security import HTTPAuthorizationCredentials
-
+from orchestrator.twin_orchestrator import TwinOrchestrator
+from llm.ollama_service import OllamaService
 from app.dependencies.auth import get_current_user, bearer_scheme
 from app.schemas.chat import ChatRequest, ChatResponse
 from app.services.conversation_service import save_message
 from app.services.user_context_service import get_user_context
 
+orchestrator = TwinOrchestrator()
+llm_service = OllamaService()
 
 router = APIRouter(
     prefix="/chat",
@@ -33,7 +38,13 @@ def chat(
         token=token,
     )
 
-    response = "ATHENA received your message."
+    result = orchestrator.process(
+    user_input=data.message,
+    context=context,
+    llm_service=llm_service,
+)
+
+    response = result["response"]
 
     save_message(
         user_id=user_id,
