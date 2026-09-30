@@ -34,95 +34,55 @@ export default function Sidebar({ open, onClose }) {
     navigate('/login');
   };
 
-  const sidebarStyle = {
-    position: 'fixed', top: 0, left: 0, bottom: 0, zIndex: 500,
-    width: 240, background: '#0d0d14',
-    borderRight: '1px solid rgba(255,255,255,0.06)',
-    display: 'flex', flexDirection: 'column',
-    transition: 'transform 0.3s ease',
-    transform: open ? 'translateX(0)' : 'translateX(-100%)',
-  };
+  const name = user?.name || user?.personalInformation?.fullName || 'User';
+  const initial = name[0].toUpperCase();
 
   return (
     <>
-      {/* Mobile backdrop */}
       {open && (
         <div
           onClick={onClose}
-          style={{
-            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)',
-            zIndex: 499, backdropFilter: 'blur(4px)',
-          }}
+          className="fixed inset-0 z-[499] bg-black/55 backdrop-blur-sm lg:hidden"
         />
       )}
 
-      <nav style={sidebarStyle}>
-        {/* Logo */}
-        <div style={{
-          padding: '20px 20px 16px',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{
-              width: 34, height: 34, borderRadius: 10,
-              background: 'linear-gradient(135deg, #dc2626, #7f1d1d)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 0 15px rgba(220,38,38,0.4)',
-            }}>
-              <Zap size={18} color="white" />
+      <nav
+        className={`fixed top-0 bottom-0 left-0 z-[500] flex w-[var(--sidebar-width)] flex-col border-r border-white/[0.06] bg-[#0e1016] transition-transform duration-300 ${
+          open ? 'translate-x-0' : '-translate-x-full'
+        } lg:translate-x-0`}
+      >
+        <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-5">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-rose-400 to-rose-800 shadow-[0_8px_20px_rgba(225,29,72,0.25)]">
+              <Zap size={17} color="white" />
             </div>
             <div>
-              <span style={{ color: '#f1f5f9', fontWeight: 800, fontSize: 18, letterSpacing: '-0.02em' }}>ATHENA</span>
-              <p style={{ color: '#dc2626', fontSize: 9, fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', marginTop: -2 }}>Digital Twin</p>
+              <span className="block text-[17px] font-bold tracking-tight text-slate-50">ATHENA</span>
+              <p className="mt-[-2px] text-[9px] font-semibold tracking-[0.16em] text-rose-400 uppercase">Digital Twin</p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: '#475569', padding: 4, borderRadius: 6, display: 'flex',
-            }}
-          >
-            <X size={16} />
+          <button type="button" onClick={onClose} className="icon-btn lg:hidden">
+            <X size={15} />
           </button>
         </div>
 
-        {/* User avatar */}
-        <div style={{ padding: '16px 16px 8px' }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 12,
-            padding: '10px 12px', borderRadius: 12,
-            background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)',
-          }}>
-            <div style={{
-              width: 36, height: 36, borderRadius: '50%',
-              background: 'linear-gradient(135deg, #dc2626, #7f1d1d)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: 'white', fontWeight: 700, fontSize: 14, flexShrink: 0,
-            }}>
-              {(user?.name || user?.personalInformation?.fullName || 'A')[0].toUpperCase()}
+        <div className="px-3 pt-4 pb-2">
+          <div className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-400 to-rose-800 text-sm font-bold text-white">
+              {initial}
             </div>
-            <div style={{ minWidth: 0 }}>
-              <p style={{ color: '#f1f5f9', fontWeight: 600, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user?.name || user?.personalInformation?.fullName || 'User'}
-              </p>
-              <p style={{ color: '#94a3b8', fontSize: 11, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user?.email || ''}
-              </p>
+            <div className="min-w-0">
+              <p className="truncate text-[13px] font-semibold text-slate-50">{name}</p>
+              <p className="truncate text-[11px] text-slate-400">{user?.email || ''}</p>
             </div>
           </div>
         </div>
 
-        {/* Navigation */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '0 8px' }}>
+        <div className="flex-1 overflow-y-auto px-2 py-1">
           {NAV_ITEMS.map((item, i) => {
             if (item.type === 'divider') {
               return (
-                <p key={i} style={{
-                  color: '#334155', fontSize: 10, fontWeight: 700, letterSpacing: '0.1em',
-                  textTransform: 'uppercase', padding: '16px 8px 6px',
-                }}>
+                <p key={i} className="mt-4 mb-1 px-3 text-[10px] font-bold tracking-[0.14em] text-slate-600 uppercase">
                   {item.label}
                 </p>
               );
@@ -135,21 +95,20 @@ export default function Sidebar({ open, onClose }) {
                 onClick={onClose}
                 className={({ isActive }) => `athena-sidebar-item${isActive ? ' active' : ''}`}
               >
-                <Icon size={17} />
+                <Icon size={16} />
                 {item.label}
               </NavLink>
             );
           })}
         </div>
 
-        {/* Logout */}
-        <div style={{ padding: '12px 8px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="border-t border-white/[0.06] px-2 py-3">
           <button
+            type="button"
             onClick={handleLogout}
-            className="athena-sidebar-item"
-            style={{ width: '100%', background: 'none', border: 'none' }}
+            className="athena-sidebar-item w-full border-none bg-transparent"
           >
-            <LogOut size={17} />
+            <LogOut size={16} />
             Sign Out
           </button>
         </div>

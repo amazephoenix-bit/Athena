@@ -9,15 +9,15 @@ export default function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#0a0a0f' }}>
+    <div className="flex min-h-screen flex-col bg-[var(--athena-bg)]">
       <DemoBanner />
 
-      <div style={{ display: 'flex', flex: 1, position: 'relative' }}>
+      <div className="relative flex min-h-0 flex-1">
         <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, minHeight: '100vh' }}>
+        <div className="flex min-h-screen min-w-0 flex-1 flex-col lg:pl-[var(--sidebar-width)]">
           <Navbar onMenuClick={() => setSidebarOpen(true)} />
-          <main style={{ flex: 1, padding: '24px 20px', maxWidth: 1200, width: '100%', margin: '0 auto', boxSizing: 'border-box' }} className="page-enter">
+          <main className="page-enter mx-auto w-full max-w-[1180px] flex-1 px-4 py-6 sm:px-6 lg:px-8">
             <Outlet />
           </main>
         </div>

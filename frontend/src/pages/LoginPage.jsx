@@ -39,153 +39,100 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh', background: '#0a0a0f',
-      display: 'flex', flexDirection: 'column',
-      position: 'relative', overflow: 'hidden',
-    }}>
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[var(--athena-bg)]">
       <DemoBanner />
       <ToastContainer />
 
-      {/* Background glow effects */}
-      <div style={{
-        position: 'absolute', top: -200, right: -200,
-        width: 600, height: 600, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: -200, left: -200,
-        width: 500, height: 500, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(220,38,38,0.05) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+      <div className="pointer-events-none absolute -top-40 -right-40 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,rgba(225,29,72,0.08),transparent_68%)]" />
+      <div className="pointer-events-none absolute -bottom-48 -left-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(148,163,184,0.06),transparent_70%)]" />
 
-      <div style={{
-        flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '40px 20px',
-      }}>
-        <div style={{ width: '100%', maxWidth: 420 }}>
-          {/* Logo */}
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div className="float" style={{ display: 'inline-flex', marginBottom: 20 }}>
-              <div style={{
-                width: 64, height: 64, borderRadius: 18,
-                background: 'linear-gradient(135deg, #dc2626, #7f1d1d)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 0 40px rgba(220,38,38,0.4)',
-              }}>
-                <Zap size={30} color="white" />
+      <div className="relative mx-auto grid w-full max-w-5xl flex-1 items-center gap-10 px-5 py-12 lg:grid-cols-2 lg:px-8">
+        <div className="hidden lg:block">
+          <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-400 to-rose-800 shadow-[0_12px_30px_rgba(225,29,72,0.28)]">
+            <Zap size={22} color="white" />
+          </div>
+          <h1 className="text-gradient mb-3 text-5xl font-bold tracking-tight">ATHENA</h1>
+          <p className="mb-8 max-w-sm text-lg leading-8 text-slate-400">Your evolving digital twin. Tasks, wellness, memory, and safety — orchestrated by specialized AI agents.</p>
+          <div className="grid gap-3">
+            {['Seven specialized agents', 'Private by design', 'A companion that learns you'].map((item) => (
+              <div key={item} className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-3 text-sm text-slate-300">
+                {item}
               </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-auto w-full max-w-[420px]">
+          <div className="mb-8 text-center lg:hidden">
+            <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-400 to-rose-800">
+              <Zap size={24} color="white" />
             </div>
-            <h1 style={{
-              fontSize: 36, fontWeight: 900, letterSpacing: '-0.03em',
-              background: 'linear-gradient(135deg, #f1f5f9, #dc2626)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text', marginBottom: 8,
-            }}>
-              ATHENA
-            </h1>
-            <p style={{ color: '#64748b', fontSize: 15, fontStyle: 'italic' }}>
-              Your evolving digital twin.
-            </p>
+            <h1 className="text-gradient text-3xl font-bold tracking-tight">ATHENA</h1>
+            <p className="mt-1 text-sm text-slate-500">Your evolving digital twin.</p>
           </div>
 
-          {/* Card */}
-          <div className="glass-card" style={{ padding: 32 }}>
-            <h2 style={{ color: '#f1f5f9', fontSize: 20, fontWeight: 700, marginBottom: 24, textAlign: 'center' }}>
-              Sign in to ATHENA
-            </h2>
-
-            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-              {/* Email */}
+          <div className="glass-card p-8">
+            <h2 className="mb-6 text-center text-xl font-semibold tracking-tight text-slate-50">Sign in to ATHENA</h2>
+            <form onSubmit={handleLogin} className="flex flex-col gap-4">
               <div>
                 <label className="athena-label" htmlFor="email">Email address</label>
-                <div style={{ position: 'relative' }}>
-                  <Mail size={16} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#475569' }} />
+                <div className="relative">
+                  <Mail size={16} className="absolute top-1/2 left-3.5 -translate-y-1/2 text-slate-500" />
                   <input
                     id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="athena-input"
-                    style={{ paddingLeft: 40 }}
+                    className="athena-input pl-10"
                     autoComplete="email"
                   />
                 </div>
               </div>
-
-              {/* Password */}
               <div>
                 <label className="athena-label" htmlFor="password">Password</label>
-                <div style={{ position: 'relative' }}>
-                  <Lock size={16} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#475569' }} />
+                <div className="relative">
+                  <Lock size={16} className="absolute top-1/2 left-3.5 -translate-y-1/2 text-slate-500" />
                   <input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Your password"
-                    className="athena-input"
-                    style={{ paddingLeft: 40, paddingRight: 44 }}
+                    className="athena-input pr-11 pl-10"
                     autoComplete="current-password"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    style={{
-                      position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)',
-                      background: 'none', border: 'none', cursor: 'pointer', color: '#475569',
-                      display: 'flex', alignItems: 'center',
-                    }}
+                    className="absolute top-1/2 right-3 -translate-y-1/2 border-0 bg-transparent text-slate-500"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
               </div>
-
-              {/* Forgot password */}
-              <div style={{ textAlign: 'right' }}>
-                <button type="button" style={{
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  color: '#dc2626', fontSize: 13, fontWeight: 500,
-                }}>
+              <div className="text-right">
+                <button type="button" className="border-0 bg-transparent text-[13px] font-medium text-rose-400">
                   Forgot password?
                 </button>
               </div>
-
-              {/* Login button */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="athena-btn-primary"
-                style={{ width: '100%', justifyContent: 'center', padding: '13px 24px', fontSize: 15 }}
-              >
+              <button type="submit" disabled={loading} className="athena-btn-primary w-full justify-center py-3 text-[15px]">
                 {loading ? <LoadingSpinner size={18} /> : <><span>Sign In</span><ArrowRight size={16} /></>}
               </button>
             </form>
 
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 12, margin: '24px 0',
-            }}>
-              <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.08)' }} />
-              <span style={{ color: '#475569', fontSize: 13 }}>or</span>
-              <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.08)' }} />
+            <div className="my-6 flex items-center gap-3">
+              <div className="h-px flex-1 bg-white/10" />
+              <span className="text-[13px] text-slate-500">or</span>
+              <div className="h-px flex-1 bg-white/10" />
             </div>
 
-            <Link
-              to="/signup"
-              className="athena-btn-secondary"
-              style={{ width: '100%', justifyContent: 'center', textDecoration: 'none' }}
-            >
+            <Link to="/signup" className="athena-btn-secondary w-full justify-center no-underline">
               Create Account
             </Link>
           </div>
 
-          <p style={{ textAlign: 'center', color: '#334155', fontSize: 12, marginTop: 24 }}>
-            ATHENA — HumanTwin AI · GATEWAYS 2026
-          </p>
+          <p className="mt-6 text-center text-xs text-slate-600">ATHENA — HumanTwin AI · GATEWAYS 2026</p>
         </div>
       </div>
     </div>

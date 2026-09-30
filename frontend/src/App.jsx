@@ -36,6 +36,7 @@ import RewardsPage from './pages/RewardsPage';
 import FeedbackPage from './pages/FeedbackPage';
 import SettingsPage from './pages/SettingsPage';
 
+import LandingPage from './pages/LandingPage';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 
 /** Route guard: authenticated users only */
@@ -55,12 +56,14 @@ function PublicRoute({ children }) {
   return children;
 }
 
-/** Redirects based on onboarding state */
-function HomeRedirect() {
+/** Public Landing / Hero entry: displays the hero section */
+function RootRoute() {
   const { isAuthenticated, loading, user } = useAuth();
   if (loading) return <LoadingSpinner fullPage />;
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
-  return <Navigate to={user?.onboardingComplete ? '/dashboard' : '/onboarding/personal'} replace />;
+  if (isAuthenticated) {
+    return <Navigate to={user?.onboardingComplete ? '/dashboard' : '/onboarding/personal'} replace />;
+  }
+  return <LandingPage />;
 }
 
 export default function App() {
@@ -70,8 +73,9 @@ export default function App() {
         <AuthProvider>
           <OnboardingProvider>
             <Routes>
-              {/* Root */}
-              <Route path="/" element={<HomeRedirect />} />
+              {/* Root Landing / Hero Page */}
+              <Route path="/" element={<RootRoute />} />
+              <Route path="/landing" element={<LandingPage />} />
 
               {/* Auth */}
               <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />

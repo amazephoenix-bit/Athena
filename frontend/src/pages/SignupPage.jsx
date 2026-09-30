@@ -41,28 +41,24 @@ export default function SignupPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0a0f', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[var(--athena-bg)]">
       <DemoBanner />
       <ToastContainer />
-      <div style={{ position: 'absolute', top: -150, right: -150, width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(220,38,38,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div className="pointer-events-none absolute -top-32 -right-24 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(225,29,72,0.07),transparent_70%)]" />
 
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
-        <div style={{ width: '100%', maxWidth: 420 }}>
-          {/* Logo */}
-          <div style={{ textAlign: 'center', marginBottom: 32 }}>
-            <div style={{ display: 'inline-flex', marginBottom: 16 }}>
-              <div style={{ width: 52, height: 52, borderRadius: 15, background: 'linear-gradient(135deg, #dc2626, #7f1d1d)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 30px rgba(220,38,38,0.35)' }}>
-                <Zap size={24} color="white" />
-              </div>
+      <div className="relative flex flex-1 items-center justify-center px-5 py-12">
+        <div className="w-full max-w-[420px]">
+          <div className="mb-8 text-center">
+            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-400 to-rose-800">
+              <Zap size={22} color="white" />
             </div>
-            <h1 style={{ fontSize: 28, fontWeight: 900, letterSpacing: '-0.03em', background: 'linear-gradient(135deg, #f1f5f9, #dc2626)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>ATHENA</h1>
-            <p style={{ color: '#64748b', fontSize: 14 }}>Start your digital twin journey</p>
+            <h1 className="text-gradient text-3xl font-bold tracking-tight">ATHENA</h1>
+            <p className="mt-1 text-sm text-slate-500">Start your digital twin journey</p>
           </div>
 
-          <div className="glass-card" style={{ padding: 32 }}>
-            <h2 style={{ color: '#f1f5f9', fontSize: 18, fontWeight: 700, marginBottom: 24, textAlign: 'center' }}>Create your account</h2>
-
-            <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div className="glass-card p-8">
+            <h2 className="mb-6 text-center text-lg font-semibold text-slate-50">Create your account</h2>
+            <form onSubmit={handleSignup} className="flex flex-col gap-4">
               {[
                 { id: 'name', label: 'Full name', type: 'text', field: 'name', icon: User, placeholder: 'Your name', auto: 'name' },
                 { id: 'email', label: 'Email', type: 'email', field: 'email', icon: Mail, placeholder: 'you@example.com', auto: 'email' },
@@ -71,30 +67,27 @@ export default function SignupPage() {
               ].map(({ id, label, type, field, icon: Icon, placeholder, auto }) => (
                 <div key={id}>
                   <label className="athena-label" htmlFor={id}>{label}</label>
-                  <div style={{ position: 'relative' }}>
-                    <Icon size={16} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#475569' }} />
+                  <div className="relative">
+                    <Icon size={16} className="absolute top-1/2 left-3.5 -translate-y-1/2 text-slate-500" />
                     <input
                       id={id} type={type} value={form[field]} onChange={set(field)}
-                      placeholder={placeholder} className="athena-input"
-                      style={{ paddingLeft: 40 }} autoComplete={auto}
+                      placeholder={placeholder} className="athena-input pl-10" autoComplete={auto}
                     />
                     {field === 'confirmPassword' && (
-                      <button type="button" onClick={() => setShowPass(!showPass)} style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#475569', display: 'flex' }}>
+                      <button type="button" onClick={() => setShowPass(!showPass)} className="absolute top-1/2 right-3 -translate-y-1/2 border-0 bg-transparent text-slate-500">
                         {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
                       </button>
                     )}
                   </div>
                 </div>
               ))}
-
-              <button type="submit" disabled={loading} className="athena-btn-primary" style={{ width: '100%', justifyContent: 'center', padding: '13px 24px', fontSize: 15, marginTop: 8 }}>
+              <button type="submit" disabled={loading} className="athena-btn-primary mt-2 w-full justify-center py-3 text-[15px]">
                 {loading ? <LoadingSpinner size={18} /> : <><span>Create Account</span><ArrowRight size={16} /></>}
               </button>
             </form>
-
-            <p style={{ textAlign: 'center', color: '#64748b', fontSize: 13, marginTop: 20 }}>
+            <p className="mt-5 text-center text-[13px] text-slate-500">
               Already have an account?{' '}
-              <Link to="/login" style={{ color: '#dc2626', fontWeight: 600, textDecoration: 'none' }}>Sign in</Link>
+              <Link to="/login" className="font-semibold text-rose-400 no-underline">Sign in</Link>
             </p>
           </div>
         </div>

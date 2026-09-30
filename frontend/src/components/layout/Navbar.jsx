@@ -1,98 +1,78 @@
 import { useState } from 'react';
-import { Menu, Bell, Search, Shield } from 'lucide-react';
+import { Menu, Bell, Shield } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNotification } from '../../contexts/NotificationContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import NotificationCenter from '../notifications/NotificationCenter';
+
+const TITLES = {
+  '/dashboard': 'Dashboard',
+  '/chat': 'Chat',
+  '/tasks': 'Tasks',
+  '/reminders': 'Reminders',
+  '/memory': 'Memory',
+  '/behavior': 'My Twin',
+  '/wellness': 'Wellness',
+  '/lifestyle': 'Lifestyle',
+  '/pets': 'Pets',
+  '/safety': 'Safety',
+  '/rewards': 'Rewards',
+  '/feedback': 'Feedback',
+  '/settings': 'Settings',
+};
 
 export default function Navbar({ onMenuClick }) {
   const { user } = useAuth();
   const { unreadCount } = useNotification();
   const [showNotifications, setShowNotifications] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const name = user?.name || user?.personalInformation?.fullName || 'there';
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  const title = TITLES[location.pathname] || 'ATHENA';
 
   return (
     <>
-      <header style={{
-        height: 60, background: 'rgba(13,13,20,0.95)',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
-        display: 'flex', alignItems: 'center',
-        padding: '0 20px', gap: 16,
-        backdropFilter: 'blur(10px)',
-        position: 'sticky', top: 0, zIndex: 300,
-      }}>
-        {/* Menu button */}
-        <button
-          onClick={onMenuClick}
-          style={{
-            background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: 8, padding: '6px 8px', cursor: 'pointer', color: '#94a3b8',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'all 0.2s',
-          }}
-        >
+      <header className="sticky top-0 z-[300] flex h-16 items-center gap-3 border-b border-white/[0.06] bg-[#0e1016]/90 px-4 backdrop-blur-xl sm:px-6">
+        <button type="button" onClick={onMenuClick} className="icon-btn lg:hidden" aria-label="Open menu">
           <Menu size={18} />
         </button>
 
-        {/* Greeting */}
-        <div style={{ flex: 1 }}>
-          <p style={{ color: '#f1f5f9', fontWeight: 600, fontSize: 15 }}>
-            {greeting}, <span style={{ color: '#dc2626' }}>{name.split(' ')[0]}</span> 👋
-          </p>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-[15px] font-semibold tracking-tight text-slate-100">{title}</p>
+          <p className="hidden truncate text-xs text-slate-500 sm:block">Welcome back, {name.split(' ')[0]}</p>
         </div>
 
-        {/* Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          {/* Safety button */}
+        <div className="flex items-center gap-2">
           <button
+            type="button"
             onClick={() => navigate('/safety')}
-            style={{
-              background: 'rgba(220,38,38,0.1)', border: '1px solid rgba(220,38,38,0.3)',
-              borderRadius: 8, padding: '6px 12px', cursor: 'pointer', color: '#dc2626',
-              display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 700,
-              transition: 'all 0.2s', letterSpacing: '0.05em',
-            }}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-rose-500/25 bg-rose-500/10 px-2.5 py-1.5 text-[11px] font-bold tracking-wide text-rose-400 uppercase"
           >
-            <Shield size={14} />
+            <Shield size={13} />
             SOS
           </button>
 
-          {/* Notifications */}
           <button
+            type="button"
             onClick={() => setShowNotifications(true)}
-            style={{
-              background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: 8, padding: '6px 8px', cursor: 'pointer', color: '#94a3b8',
-              position: 'relative', display: 'flex', alignItems: 'center', transition: 'all 0.2s',
-            }}
+            className="icon-btn relative"
+            aria-label="Notifications"
           >
-            <Bell size={18} />
+            <Bell size={17} />
             {unreadCount > 0 && (
-              <span style={{
-                position: 'absolute', top: 4, right: 4,
-                width: 8, height: 8, borderRadius: '50%',
-                background: '#dc2626', boxShadow: '0 0 6px rgba(220,38,38,0.8)',
-              }} />
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-rose-500" />
             )}
           </button>
 
-          {/* Avatar */}
-          <div
+          <button
+            type="button"
             onClick={() => navigate('/settings')}
-            style={{
-              width: 34, height: 34, borderRadius: '50%', cursor: 'pointer',
-              background: 'linear-gradient(135deg, #dc2626, #7f1d1d)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: 'white', fontWeight: 700, fontSize: 14,
-              boxShadow: '0 0 10px rgba(220,38,38,0.3)',
-            }}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-rose-400 to-rose-800 text-sm font-bold text-white"
+            aria-label="Open settings"
           >
             {(user?.name || user?.personalInformation?.fullName || 'A')[0].toUpperCase()}
-          </div>
+          </button>
         </div>
       </header>
 

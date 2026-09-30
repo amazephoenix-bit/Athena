@@ -19,44 +19,24 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md', h
   return (
     <div
       onClick={onClose}
-      style={{
-        position: 'fixed', inset: 0, zIndex: 1000,
-        background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: 16,
-      }}
+      className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 p-4 backdrop-blur-md"
     >
       <div
-        className="modal-enter"
+        className="modal-enter w-full overflow-auto rounded-2xl border border-white/10 bg-[#14171f] shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
         onClick={(e) => e.stopPropagation()}
-        style={{
-          background: '#13131a', border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: 20, width: '100%', maxWidth: maxW,
-          maxHeight: '90vh', overflow: 'auto',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.6)',
-        }}
+        style={{ maxWidth: maxW, maxHeight: '90vh' }}
       >
         {(title || !hideClose) && (
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            padding: '20px 24px', borderBottom: '1px solid rgba(255,255,255,0.06)',
-          }}>
-            {title && <h2 style={{ color: '#f1f5f9', fontSize: 18, fontWeight: 700, margin: 0 }}>{title}</h2>}
+          <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-5">
+            {title && <h2 className="m-0 text-lg font-semibold tracking-tight text-slate-50">{title}</h2>}
             {!hideClose && (
-              <button onClick={onClose} style={{
-                background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: 8, padding: 6, cursor: 'pointer', color: '#94a3b8',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                transition: 'all 0.2s',
-              }}>
+              <button type="button" onClick={onClose} className="icon-btn">
                 <X size={16} />
               </button>
             )}
           </div>
         )}
-        <div style={{ padding: 24 }}>
-          {children}
-        </div>
+        <div className="p-6">{children}</div>
       </div>
     </div>
   );

@@ -18,24 +18,18 @@ const COLORS = {
 function Toast({ toast, onDismiss }) {
   return (
     <div
-      className={toast.exiting ? 'toast-exit' : 'toast-enter'}
-      style={{
-        background: '#1a1a24', border: '1px solid rgba(255,255,255,0.1)',
-        borderLeft: `3px solid ${COLORS[toast.type] || COLORS.info}`,
-        borderRadius: 12, padding: '14px 16px',
-        display: 'flex', alignItems: 'flex-start', gap: 12,
-        width: 340, boxShadow: '0 8px 30px rgba(0,0,0,0.4)',
-        position: 'relative',
-      }}
+      className={`${toast.exiting ? 'toast-exit' : 'toast-enter'} flex w-[min(340px,calc(100vw-32px))] items-start gap-3 rounded-xl border border-white/10 bg-[#171a22] p-3.5 shadow-2xl`}
+      style={{ borderLeft: `3px solid ${COLORS[toast.type] || COLORS.info}` }}
     >
-      <div style={{ flexShrink: 0, marginTop: 1 }}>{ICONS[toast.type] || ICONS.info}</div>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        {toast.title && <p style={{ color: '#f1f5f9', fontWeight: 600, fontSize: 14, marginBottom: 2 }}>{toast.title}</p>}
-        {toast.message && <p style={{ color: '#94a3b8', fontSize: 13, lineHeight: 1.5 }}>{toast.message}</p>}
+      <div className="mt-0.5 shrink-0">{ICONS[toast.type] || ICONS.info}</div>
+      <div className="min-w-0 flex-1">
+        {toast.title && <p className="mb-0.5 text-sm font-semibold text-slate-50">{toast.title}</p>}
+        {toast.message && <p className="text-[13px] leading-5 text-slate-400">{toast.message}</p>}
       </div>
       <button
+        type="button"
         onClick={() => onDismiss(toast.id)}
-        style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#475569', padding: 2, flexShrink: 0 }}
+        className="shrink-0 border-0 bg-transparent p-0.5 text-slate-500"
       >
         <X size={14} />
       </button>
@@ -47,10 +41,7 @@ export default function ToastContainer() {
   const { toasts, dismissToast } = useNotification();
 
   return (
-    <div style={{
-      position: 'fixed', bottom: 24, right: 24, zIndex: 2000,
-      display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-end',
-    }}>
+    <div className="fixed right-4 bottom-6 z-[2000] flex flex-col items-end gap-2.5 sm:right-6">
       {toasts.map((toast) => (
         <Toast key={toast.id} toast={toast} onDismiss={dismissToast} />
       ))}
